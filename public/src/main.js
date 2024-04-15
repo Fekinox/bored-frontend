@@ -20,25 +20,72 @@ function createPostThumbnail(post, parent) {
     el.appendChild(img)
 }
 
-getPosts("", 1).then((p) => console.log(p))
+// GALLERY
 
-const postView = document.getElementById("post-view")
+const galleryView = {
+    root: document.getElementById('gallery-view'),
+    postContainer: document.getElementById('post-view'),
+    async onEnter({
+        tags = "",
+        page = 1,
+    } = {}) {
+        const posts = await getPosts(tags, page)
+        for (const p of posts) {
+            createPostThumbnail(p, this.postContainer)
+        }
+    }
+}
 
 const searchForm = document.getElementById("search")
 const searchInput = document.getElementById("tag-search")
 searchForm.addEventListener("submit", (event) => {
     event.preventDefault()
-    updatePostView(searchInput.value, 1)
+    // updatePostView(searchInput.value, 1)
 })
 
-async function updatePostView(searchTags, page) {
-    postView.textContent = ""
-
-    const posts = await getPosts(searchTags, page)
-    for (const p of posts) {
-        createPostThumbnail(p, postView)
-    }
+// opts is an object that contains the following:
+// tags - tags to query the API by
+// page - page to start searching from
+galleryView.initialize = async function(opts) {
+    console.log(this)
 }
+
+const postView = {
+    root: document.getElementById('post-full-view')
+}
+
+const loginView = {
+    root: document.getElementById('login-view'),
+    form: document.getElementById('login-form'),
+    username: document.querySelector('#login-form .username'),
+    password: document.querySelector('#login-form .password'),
+}
+
+const signupView = {
+    root: document.getElementById('signup-view'),
+    form: document.getElementById('signup-form'),
+    username: document.querySelector('#signup-form .username'),
+    password: document.querySelector('#signup-form .password'),
+}
+
+const views = {
+    "gallery": galleryView,
+    "post": postView,
+    "login": loginView,
+    "signup": signupView,
+    "artistPage": artistPageView,
+}
+
+async function changeView(view, options) {
+    // Hide all other views
+    for (const v in views) {
+        views[v].root.classList.add('hidden')
+    }
+    views[view].classList.remove('hidden')
+    views[view].loadFrom(options)
+}
+
+getPosts("", 1).then((p) => console.log(p))
 
 const buttonContainer = document.querySelector('header div.button-hbox')
 const loginButton = document.createElement('button')
@@ -62,4 +109,6 @@ loginButton.addEventListener('click', async (event) => {
 
 buttonContainer.appendChild(loginButton)
 
-updatePostView("", 1)
+// updatePostView("", 1)
+
+changeView("gallery", {})
