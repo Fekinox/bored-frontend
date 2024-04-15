@@ -231,7 +231,7 @@ const uploadView = {
         formData.append('description', this.description.value)
         formData.append('tags', this.tags.value)
 
-        const resp = await fetch(`${API_URL}/api/auth/login`, {
+        const resp = await fetch(`${API_URL}/api/posts`, {
             method: 'POST',
             credentials: "include",
             body: formData,
