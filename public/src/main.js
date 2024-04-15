@@ -155,6 +155,7 @@ const postView = {
                 cache: "no-cache",
             })
             const json = await resp.json()
+            console.log(json)
             changeView("post", json)
         }
 
