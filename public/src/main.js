@@ -236,6 +236,7 @@ const loginStatus = document.getElementById("login-status")
 async function updateLoginStatus() {
     const resp = await fetch(`${API_URL}/api/auth/login-status`, {
         cache: "no-cache",
+        credentials: "include",
     })
     const json = await resp.json()
     if (!json.loggedIn) {
