@@ -24,7 +24,7 @@ function createPostThumbnail(post, parent) {
 
 const galleryView = {
     root: document.getElementById('gallery-view'),
-    postContainer: document.getElementById('post-view'),
+    postContainer: document.getElementById('post-container'),
     // tags - tags to query the API by
     // page - page to start searching from
     async onEnter({
