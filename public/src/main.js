@@ -157,6 +157,7 @@ const loginView = {
         })
 
         await updateLoginStatus()
+        changeView("gallery", {})
     },
     async onEnter() {
     }
@@ -172,6 +173,34 @@ const signupView = {
     form: document.getElementById('signup-form'),
     username: document.querySelector('#signup-form .username'),
     password: document.querySelector('#signup-form .password'),
+    async signup() {
+        let resp = await fetch(`${API_URL}/api/auth/signup`, {
+            method: 'POST',
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user: this.username.value,
+                password: this.password.value,
+            })
+        })
+
+        resp = await fetch(`${API_URL}/api/auth/login`, {
+            method: 'POST',
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user: this.username.value,
+                password: this.password.value,
+            })
+        })
+
+        await updateLoginStatus()
+        changeView("gallery", {})
+    },
     async onEnter() {
     }
 }
@@ -238,6 +267,7 @@ document.getElementById("logout-button").addEventListener("click", async (event)
         credentials: "include",
     })
     await updateLoginStatus()
+    changeView("gallery", {})
 })
 
 const loginStatus = document.getElementById("login-status")
