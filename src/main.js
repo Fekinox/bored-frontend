@@ -1,4 +1,4 @@
-const API_URL = 'https://bored-fekinox-0a1792ab3282.herokuapp.com'
+const API_URL = 'https://localhost:7777'
 
 async function getPosts(searchTags, page) {
     params = []
@@ -39,5 +39,27 @@ async function updatePostView(searchTags, page) {
         createPostThumbnail(p, postView)
     }
 }
+
+const buttonContainer = document.querySelector('header div.button-hbox')
+const loginButton = document.createElement('button')
+loginButton.textContent = 'Login'
+loginButton.addEventListener('click', async (event) => {
+    const resp = await fetch(`${API_URL}/api/auth/login`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            user: "foo",
+            password: "foo",
+        })
+    })
+
+    const json = await resp.json()
+    console.log(json)
+})
+
+buttonContainer.appendChild(loginButton)
 
 updatePostView("", 1)
