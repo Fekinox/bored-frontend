@@ -146,7 +146,7 @@ const loginView = {
     async login() {
         const resp = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
-            credentials: true,
+            credentials: "include",
             headers: {
                 'Content-Type': 'application/json',
             },
