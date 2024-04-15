@@ -150,7 +150,7 @@ const loginView = {
 loginView.form.addEventListener("submit", async (event) => {
     event.preventDefault()
 
-    const resp = await fetch(`${API_URL}/auth/login`, {
+    const resp = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application-json',
