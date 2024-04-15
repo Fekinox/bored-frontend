@@ -121,4 +121,18 @@ document.getElementById("upload-button").addEventListener("click", (event) => {
     changeView("upload", {})
 })
 
+const loginStatus = document.getElementById("login-status")
+
+async function updateLoginStatus() {
+    const resp = await fetch(`${API_URL}/api/auth/login-status`)
+    const json = await resp.json()
+    if (!json.loggedIn) {
+        loginStatus.textContent = "not logged in"
+    } else {
+        loginStatus.textContent = `logged in as ${json.user}`
+    }
+}
+
+updateLoginStatus()
+
 changeView("gallery", {})
