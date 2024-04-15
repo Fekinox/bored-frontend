@@ -242,6 +242,11 @@ const uploadView = {
     }
 }
 
+uploadView.form.addEventListener("submit", async (event) => {
+    event.preventDefault()
+    await uploadView.upload()
+})
+
 const artistPageView = {
     root: document.getElementById('artist-page-view'),
     async onEnter({
