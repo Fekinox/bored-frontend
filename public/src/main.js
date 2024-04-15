@@ -67,6 +67,12 @@ const postView = {
     title: document.querySelector('#post-full-view .title'),
     description: document.querySelector('#post-full-view .description'),
 
+    addTagForm: document.querySelector('#post-full-view .add-tag'),
+    addTagInput: document.querySelector('.add-tag .tag'),
+    removeTagForm: document.querySelector('#post-full-view .remove-tag'),
+    removeTagInput: document.querySelector('.remove-tag .tag'),
+    deletePost: document.querySelector('#post-full-view .delete-button'),
+
     createTags(tags) {
         this.tags.textContent = ""
         let groups = {}
@@ -133,6 +139,35 @@ const postView = {
         this.title.textContent = post.title
         this.description.textContent = post.description
         this.createTags(post.tags)
+
+        this.addTagForm.onsubmit = async (event) => {
+            const resp = await fetch(`${API_URL}/api/posts/${post.postId}/tags`, {
+                method: 'PUT',
+                credentials: "include",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: [ this.addTagInput.value ],
+            })
+        }
+
+        this.removeTagForm.onsubmit = async (event) => {
+            const resp = await fetch(`${API_URL}/api/posts/${post.postId}/tags`, {
+                method: 'DELETE',
+                credentials: "include",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: [ this.addTagInput.value ],
+            })
+        }
+
+        this.deletePost.onclick = async (event) => {
+            const resp = await fetch(`${API_URL}/api/posts/${post.postId}`, {
+                method: 'DELETE',
+                credentials: "include",
+            })
+        }
     },
 }
 
