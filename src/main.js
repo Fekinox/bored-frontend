@@ -1,4 +1,4 @@
-const API_URL = 'https://localhost:7777'
+const API_URL = 'https://bored-fekinox-0a1792ab3282.herokuapp.com'
 
 async function getPosts(searchTags, page) {
     params = []
