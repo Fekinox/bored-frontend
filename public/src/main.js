@@ -143,25 +143,27 @@ const loginView = {
     form: document.getElementById('login-form'),
     username: document.querySelector('#login-form .username'),
     password: document.querySelector('#login-form .password'),
+    async login() {
+        const resp = await fetch(`${API_URL}/api/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application-json',
+            },
+            body: JSON.stringify({
+                user: this.username.value,
+                password: this.password.value,
+            })
+        })
+        const json = await resp.json()
+        console.log(json)
+    },
     async onEnter() {
     }
 }
 
 loginView.form.addEventListener("submit", async (event) => {
     event.preventDefault()
-
-    const resp = await fetch(`${API_URL}/api/auth/login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application-json',
-        },
-        body: JSON.stringify({
-            user: loginView.username.value,
-            password: loginView.password.value,
-        })
-    })
-    const json = await resp.json()
-    console.log(json)
+    await loginView.login()
 })
 
 const signupView = {
