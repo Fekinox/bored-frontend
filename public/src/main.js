@@ -147,7 +147,7 @@ const postView = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: [ this.addTagInput.value ],
+                body: JSON.stringify([ this.addTagInput.value ]),
             })
 
             resp = await fetch(`${API_URL}/api/posts/${post.postId}`)
@@ -162,7 +162,7 @@ const postView = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: [ this.addTagInput.value ],
+                body: JSON.stringify([ this.addTagInput.value ]),
             })
 
             resp = await fetch(`${API_URL}/api/posts/${post.postId}`)
