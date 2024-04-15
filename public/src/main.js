@@ -149,10 +149,14 @@ const postView = {
                 },
                 body: [ this.addTagInput.value ],
             })
+
+            resp = await fetch(`${API_URL}/api/posts/${post.postId}`)
+            const json = await resp.json()
+            changeView("post", json)
         }
 
         this.removeTagForm.onsubmit = async (event) => {
-            const resp = await fetch(`${API_URL}/api/posts/${post.postId}/tags`, {
+            let resp = await fetch(`${API_URL}/api/posts/${post.postId}/tags`, {
                 method: 'DELETE',
                 credentials: "include",
                 headers: {
@@ -160,6 +164,10 @@ const postView = {
                 },
                 body: [ this.addTagInput.value ],
             })
+
+            resp = await fetch(`${API_URL}/api/posts/${post.postId}`)
+            const json = await resp.json()
+            changeView("post", json)
         }
 
         this.deletePost.onclick = async (event) => {
@@ -167,6 +175,8 @@ const postView = {
                 method: 'DELETE',
                 credentials: "include",
             })
+
+            changeView("gallery", {})
         }
     },
 }
