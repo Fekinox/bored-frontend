@@ -68,6 +68,10 @@ const signupView = {
     password: document.querySelector('#signup-form .password'),
 }
 
+const artistPageView = {
+    root: document.getElementById('artist-page-view')
+}
+
 const views = {
     "gallery": galleryView,
     "post": postView,
