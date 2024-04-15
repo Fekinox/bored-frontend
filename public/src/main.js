@@ -42,6 +42,7 @@ const galleryView = {
         tags = "",
         page = 1,
     } = {}) {
+        this.postContainer.textContent = ""
         const posts = await getPosts(tags, page)
         for (const p of posts) {
             createPostThumbnail(p, this.postContainer)
@@ -66,7 +67,7 @@ const postView = {
     description: document.querySelector('#post-full-view .description'),
 
     createTags(tags) {
-        tags.textContent = ""
+        this.tags.textContent = ""
         let groups = {}
         for (const tag of tags) {
             if (groups[tag.namespace]) {
@@ -79,6 +80,7 @@ const postView = {
         for (const ns in groups) {
             const group = document.createElement("div")
             group.classList.add("tag-group")
+            this.tags.appendChild(group)
 
             const title = document.createElement("h4")
             title.textContent = ns
