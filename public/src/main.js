@@ -64,6 +64,7 @@ const postView = {
     async onEnter({
         post = {},
     } = {}) {
+        console.log(post)
         this.image.src = post.file.url
         this.title.textContent = post.title
         this.description.textContent = post.description
