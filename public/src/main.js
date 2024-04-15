@@ -77,7 +77,27 @@ const postView = {
             }
         }
 
+        // Sort the tag groups in the order of 
+        // artist > character > copyright > metadata > others > none.
+        let nsNames = []
         for (const ns in groups) {
+            nsNames.push(ns)
+        }
+
+        function precedence(ns) {
+            switch (ns) {
+            case "artist": return 0
+            case "character": return 1
+            case "copyright": return 2
+            case "metadata": return 3
+            case "none": return 5
+            default: return 4
+            }
+        }
+
+        nsNames.sort((a, b) => precedence(a) - precedence(b))
+
+        for (const ns of nsNames) {
             const group = document.createElement("div")
             group.classList.add("tag-group")
             this.tags.appendChild(group)
@@ -95,7 +115,7 @@ const postView = {
                 link.textContent = t
                 link.href = "#"
                 link.addEventListener("click", (event) => {
-                    changeView(gallery, { tags: `${ns}:${t}` })
+                    changeView("gallery", { tags: `${ns}:${t}` })
                     return false
                 })
                 tagList.appendChild(listItem)
