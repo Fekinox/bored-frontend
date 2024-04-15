@@ -88,7 +88,7 @@ const postView = {
 
             const tagList = document.createElement("ul")
             tagList.classList.add(ns)
-            group.appendChild(tags)
+            group.appendChild(tagList)
             for (const t of groups[ns]) {
                 const listItem = document.createElement("li")
                 const link = document.createElement("a")
