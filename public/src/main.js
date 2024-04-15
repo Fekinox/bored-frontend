@@ -54,6 +54,7 @@ const searchForm = document.getElementById("search")
 const searchInput = document.getElementById("tag-search")
 searchForm.addEventListener("submit", (event) => {
     event.preventDefault()
+    changeView("gallery", { tags: searchInput.value })
 })
 
 // POST VIEW
@@ -135,6 +136,8 @@ const postView = {
     },
 }
 
+// LOGIN VIEW
+
 const loginView = {
     root: document.getElementById('login-view'),
     form: document.getElementById('login-form'),
@@ -143,6 +146,23 @@ const loginView = {
     async onEnter() {
     }
 }
+
+loginView.form.addEventListener("submit", async (event) => {
+    event.preventDefault()
+
+    const resp = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application-json',
+        },
+        body: JSON.stringify({
+            user: loginView.username.value,
+            password: loginView.password.value,
+        })
+    })
+    const json = await resp.json()
+    console.log(json)
+})
 
 const signupView = {
     root: document.getElementById('signup-view'),
