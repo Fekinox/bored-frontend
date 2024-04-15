@@ -47,6 +47,10 @@ table {
 	border-spacing: 0;
 }
 
+.hidden {
+    display: none;
+}
+
 body {
     background-color: #1e1420;
     color: #ffffff;
