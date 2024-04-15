@@ -205,6 +205,12 @@ const signupView = {
     }
 }
 
+signupView.form.addEventListener("submit", async (event) => {
+    event.preventDefault()
+    await signupView.signup()
+})
+
+
 const uploadView = {
     root: document.getElementById('upload-view'),
     form: document.getElementById('upload-form'),
