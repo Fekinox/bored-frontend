@@ -20,7 +20,9 @@ function createPostThumbnail(post, parent) {
     a.href = "#"
 
     a.addEventListener("click", (event) => {
-        changeView("post", post)
+        changeView("post", {
+            post: post
+        })
         return false
     })
 
