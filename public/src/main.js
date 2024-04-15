@@ -17,6 +17,7 @@ function createPostThumbnail(post, parent) {
 
     const a = document.createElement("a")
     el.appendChild(a)
+    a.href = "#"
 
     a.addEventListener("click", (event) => {
         changeView("post", post)
@@ -54,10 +55,19 @@ searchForm.addEventListener("submit", (event) => {
 
 const postView = {
     root: document.getElementById('post-full-view'),
+    tags: document.querySelector('#post-full-view .tags'),
+    main: document.querySelector('#post-full-view .post-main'),
+    image: document.querySelector('#post-full-view .post-image'),
+    title: document.querySelector('#post-full-view .title'),
+    description: document.querySelector('#post-full-view .description'),
+
     async onEnter({
         post = {},
     } = {}) {
-    }
+        this.image.src = post.file.url
+        this.title.textContent = post.title
+        this.description.textContent = post.description
+    },
 }
 
 const loginView = {
@@ -102,7 +112,7 @@ const views = {
     "post": postView,
     "login": loginView,
     "signup": signupView,
-    "upload-view": uploadView,
+    "upload": uploadView,
     "artistPage": artistPageView,
 }
 
