@@ -15,9 +15,17 @@ function createPostThumbnail(post, parent) {
     el.classList.add("post")
     parent.appendChild(el)
 
+    const a = document.createElement("a")
+    el.appendChild(a)
+
+    a.addEventListener("click", (event) => {
+        changeView("post", post)
+        return false
+    })
+
     const img = document.createElement("img")
     img.src = post.file.url
-    el.appendChild(img)
+    a.appendChild(img)
 }
 
 // GALLERY
