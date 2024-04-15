@@ -25,6 +25,8 @@ function createPostThumbnail(post, parent) {
 const galleryView = {
     root: document.getElementById('gallery-view'),
     postContainer: document.getElementById('post-view'),
+    // tags - tags to query the API by
+    // page - page to start searching from
     async onEnter({
         tags = "",
         page = 1,
@@ -40,15 +42,7 @@ const searchForm = document.getElementById("search")
 const searchInput = document.getElementById("tag-search")
 searchForm.addEventListener("submit", (event) => {
     event.preventDefault()
-    // updatePostView(searchInput.value, 1)
 })
-
-// opts is an object that contains the following:
-// tags - tags to query the API by
-// page - page to start searching from
-galleryView.initialize = async function(opts) {
-    console.log(this)
-}
 
 const postView = {
     root: document.getElementById('post-full-view')
@@ -85,8 +79,8 @@ async function changeView(view, options) {
     for (const v in views) {
         views[v].root.classList.add('hidden')
     }
-    views[view].classList.remove('hidden')
-    views[view].loadFrom(options)
+    views[view].root.classList.remove('hidden')
+    views[view].onEnter(options)
 }
 
 getPosts("", 1).then((p) => console.log(p))
