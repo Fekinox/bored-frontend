@@ -144,12 +144,10 @@ const loginView = {
     username: document.querySelector('#login-form .username'),
     password: document.querySelector('#login-form .password'),
     async login() {
-        console.log(this.username.value)
-        console.log(this.password.value)
         const resp = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application-json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 user: this.username.value,
