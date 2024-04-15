@@ -151,6 +151,8 @@ const postView = {
                 body: JSON.stringify([ this.addTagInput.value ]),
             })
 
+            if (!resp?.ok) { return }
+
             resp = await fetch(`${API_URL}/api/posts/${post.postId}`, {
                 cache: "no-cache",
             })
@@ -170,6 +172,8 @@ const postView = {
                 body: JSON.stringify([ this.removeTagInput.value ]),
             })
 
+            if (!resp?.ok) { return }
+
             resp = await fetch(`${API_URL}/api/posts/${post.postId}`, {
                 cache: "no-cache",
             })
@@ -183,6 +187,8 @@ const postView = {
                 method: 'DELETE',
                 credentials: "include",
             })
+
+            if (!resp?.ok) { return }
 
             changeView("gallery", {})
         }
