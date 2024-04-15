@@ -224,6 +224,20 @@ const uploadView = {
     title: document.querySelector('#upload-form .title'),
     description: document.querySelector('#upload-form .description'),
     tags: document.querySelector('#upload-form .tags'),
+    async upload() {
+        let formData = new FormData()
+        formData.append('file', this.file.files[0])
+        formData.append('title', this.title.value)
+        formData.append('description', this.description.value)
+        formData.append('tags', this.tags.value)
+
+        const resp = await fetch(`${API_URL}/api/auth/login`, {
+            method: 'POST',
+            credentials: "include",
+            body: formData,
+        })
+        changeView("gallery", {})
+    },
     async onEnter() {
     }
 }
