@@ -142,7 +142,7 @@ const postView = {
 
         this.addTagForm.onsubmit = async (event) => {
             event.preventDefault()
-            const resp = await fetch(`${API_URL}/api/posts/${post.postId}/tags`, {
+            let resp = await fetch(`${API_URL}/api/posts/${post.postId}/tags`, {
                 method: 'PUT',
                 credentials: "include",
                 headers: {
