@@ -150,7 +150,9 @@ const postView = {
                 body: JSON.stringify([ this.addTagInput.value ]),
             })
 
-            resp = await fetch(`${API_URL}/api/posts/${post.postId}`)
+            resp = await fetch(`${API_URL}/api/posts/${post.postId}`, {
+                cache: "no-cache",
+            })
             const json = await resp.json()
             changeView("post", json)
         }
@@ -165,7 +167,9 @@ const postView = {
                 body: JSON.stringify([ this.removeTagInput.value ]),
             })
 
-            resp = await fetch(`${API_URL}/api/posts/${post.postId}`)
+            resp = await fetch(`${API_URL}/api/posts/${post.postId}`, {
+                cache: "no-cache",
+            })
             const json = await resp.json()
             changeView("post", json)
         }
