@@ -55,6 +55,8 @@ searchForm.addEventListener("submit", (event) => {
     event.preventDefault()
 })
 
+// POST VIEW
+
 const postView = {
     root: document.getElementById('post-full-view'),
     tags: document.querySelector('#post-full-view .tags'),
@@ -63,6 +65,43 @@ const postView = {
     title: document.querySelector('#post-full-view .title'),
     description: document.querySelector('#post-full-view .description'),
 
+    createTags(tags) {
+        tags.textContent = ""
+        let groups = {}
+        for (const tag of tags) {
+            if (groups[tag.namespace]) {
+                groups[tag.namespace].push(tag.name)
+            } else {
+                groups[tag.namespace] = [tag.name]
+            }
+        }
+
+        for (const ns in groups) {
+            const group = document.createElement("div")
+            group.classList.add("tag-group")
+
+            const title = document.createElement("h4")
+            title.textContent = ns
+            group.appendChild(title)
+
+            const tagList = document.createElement("ul")
+            tagList.classList.add(ns)
+            group.appendChild(tags)
+            for (const t of groups[ns]) {
+                const listItem = document.createElement("li")
+                const link = document.createElement("a")
+                link.textContent = t
+                link.href = "#"
+                link.addEventListener("click", (event) => {
+                    changeView(gallery, { tags: `${ns}:${t}` })
+                    return false
+                })
+                tagList.appendChild(listItem)
+                listItem.appendChild(link)
+            }
+        }
+    },
+
     async onEnter({
         post = {},
     } = {}) {
@@ -70,6 +109,7 @@ const postView = {
         this.image.src = post.file.url
         this.title.textContent = post.title
         this.description.textContent = post.description
+        this.createTags(post.tags)
     },
 }
 
