@@ -141,6 +141,7 @@ const postView = {
         this.createTags(post.tags)
 
         this.addTagForm.onsubmit = async (event) => {
+            event.preventDefault()
             const resp = await fetch(`${API_URL}/api/posts/${post.postId}/tags`, {
                 method: 'PUT',
                 credentials: "include",
@@ -158,6 +159,7 @@ const postView = {
         }
 
         this.removeTagForm.onsubmit = async (event) => {
+            event.preventDefault()
             let resp = await fetch(`${API_URL}/api/posts/${post.postId}/tags`, {
                 method: 'DELETE',
                 credentials: "include",
@@ -175,6 +177,7 @@ const postView = {
         }
 
         this.deletePost.onclick = async (event) => {
+            event.preventDefault()
             const resp = await fetch(`${API_URL}/api/posts/${post.postId}`, {
                 method: 'DELETE',
                 credentials: "include",
@@ -326,18 +329,22 @@ getPosts("", 1).then((p) => console.log(p))
 
 document.getElementById("home-button").addEventListener("click", (event) => {
     changeView("gallery", {})
+    return false
 })
 
 document.getElementById("login-button").addEventListener("click", (event) => {
     changeView("login", {})
+    return false
 })
 
 document.getElementById("signup-button").addEventListener("click", (event) => {
     changeView("signup", {})
+    return false
 })
 
 document.getElementById("upload-button").addEventListener("click", (event) => {
     changeView("upload", {})
+    return false
 })
 
 document.getElementById("logout-button").addEventListener("click", async (event) => {
