@@ -186,6 +186,12 @@ const signupView = {
             })
         })
 
+        if (!resp?.ok) {
+            await updateLoginStatus()
+            changeView("gallery", {})
+            return
+        }
+
         resp = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
             credentials: "include",
