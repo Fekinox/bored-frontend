@@ -155,8 +155,8 @@ const loginView = {
                 password: this.password.value,
             })
         })
-        const json = await resp.json()
-        console.log(json)
+
+        await updateLoginStatus()
     },
     async onEnter() {
     }
@@ -229,6 +229,15 @@ document.getElementById("signup-button").addEventListener("click", (event) => {
 
 document.getElementById("upload-button").addEventListener("click", (event) => {
     changeView("upload", {})
+})
+
+document.getElementById("logout-button").addEventListener("click", async (event) => {
+    const resp = await fetch(`${API_URL}/api/auth/logout`, {
+        method: "POST",
+        cache: "no-cache",
+        credentials: "include",
+    })
+    await updateLoginStatus()
 })
 
 const loginStatus = document.getElementById("login-status")
