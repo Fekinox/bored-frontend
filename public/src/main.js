@@ -157,8 +157,9 @@ const postView = {
                 cache: "no-cache",
             })
             const json = await resp.json()
-            console.log(json)
-            changeView("post", json)
+            changeView("post", {
+                post: json
+            })
         }
 
         this.removeTagForm.onsubmit = async (event) => {
@@ -178,7 +179,9 @@ const postView = {
                 cache: "no-cache",
             })
             const json = await resp.json()
-            changeView("post", json)
+            changeView("post", {
+                post: json,
+            })
         }
 
         this.deletePost.onclick = async (event) => {
