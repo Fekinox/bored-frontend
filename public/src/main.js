@@ -130,6 +130,10 @@ async function changeView(view, options) {
 
 getPosts("", 1).then((p) => console.log(p))
 
+document.getElementById("home-button").addEventListener("click", (event) => {
+    changeView("gallery", {})
+})
+
 document.getElementById("login-button").addEventListener("click", (event) => {
     changeView("login", {})
 })
