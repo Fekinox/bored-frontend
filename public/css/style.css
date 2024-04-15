@@ -133,3 +133,7 @@ input[type=text] {
     background-color: black;
     color: #ffffff;
 }
+
+div#gallery-view {
+    display: flex;
+}

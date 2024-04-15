@@ -11,11 +11,10 @@
         <header>
             <h1>bored app</h1>
             <div class="button-hbox">
-                <button>My Account</button> 
-                <button>Upload</button> 
-                <button>Artists</button>
-                <button>Posts</button> 
-                <button>Tags</button> 
+                <button id="login-button">Login</button>
+                <button id="signup-button">Signup</button>
+                <button id="logout-button">Logout</button>
+                <button id="upload-button">Upload</button>
             </div>
         </header>
         <main>
@@ -44,6 +43,18 @@
                     <input type="text" class="username"></input>
                     <label>Password</label>
                     <input type="text" class="password"></input>
+                </form>
+            </div>
+            <div id="upload-view">
+                <form id="upload-form">
+                    <label>File</label>
+                    <input type="file" class="file"></input>
+                    <label>Title</label>
+                    <input type="text" class="title"></input>
+                    <label>Description</label>
+                    <input type="text" class="description"></input>
+                    <label>Tags</label>
+                    <input type="text" class="tags"></input>
                 </form>
             </div>
             <div id="post-full-view">

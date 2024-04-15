@@ -45,7 +45,11 @@ searchForm.addEventListener("submit", (event) => {
 })
 
 const postView = {
-    root: document.getElementById('post-full-view')
+    root: document.getElementById('post-full-view'),
+    async onEnter({
+        post = {},
+    } = {}) {
+    }
 }
 
 const loginView = {
@@ -53,6 +57,8 @@ const loginView = {
     form: document.getElementById('login-form'),
     username: document.querySelector('#login-form .username'),
     password: document.querySelector('#login-form .password'),
+    async onEnter() {
+    }
 }
 
 const signupView = {
@@ -60,10 +66,27 @@ const signupView = {
     form: document.getElementById('signup-form'),
     username: document.querySelector('#signup-form .username'),
     password: document.querySelector('#signup-form .password'),
+    async onEnter() {
+    }
+}
+
+const uploadView = {
+    root: document.getElementById('upload-view'),
+    form: document.getElementById('upload-form'),
+    file: document.querySelector('#upload-form .file'),
+    title: document.querySelector('#upload-form .title'),
+    description: document.querySelector('#upload-form .description'),
+    tags: document.querySelector('#upload-form .tags'),
+    async onEnter() {
+    }
 }
 
 const artistPageView = {
-    root: document.getElementById('artist-page-view')
+    root: document.getElementById('artist-page-view'),
+    async onEnter({
+        artist = {},
+    }) {
+    },
 }
 
 const views = {
@@ -71,6 +94,7 @@ const views = {
     "post": postView,
     "login": loginView,
     "signup": signupView,
+    "upload-view": uploadView,
     "artistPage": artistPageView,
 }
 
@@ -85,28 +109,16 @@ async function changeView(view, options) {
 
 getPosts("", 1).then((p) => console.log(p))
 
-const buttonContainer = document.querySelector('header div.button-hbox')
-const loginButton = document.createElement('button')
-loginButton.textContent = 'Login'
-loginButton.addEventListener('click', async (event) => {
-    const resp = await fetch(`${API_URL}/api/auth/login`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            user: "foo",
-            password: "foo",
-        })
-    })
-
-    const json = await resp.json()
-    console.log(json)
+document.getElementById("login-button").addEventListener("click", (event) => {
+    changeView("login", {})
 })
 
-buttonContainer.appendChild(loginButton)
+document.getElementById("signup-button").addEventListener("click", (event) => {
+    changeView("signup", {})
+})
 
-// updatePostView("", 1)
+document.getElementById("upload-button").addEventListener("click", (event) => {
+    changeView("upload", {})
+})
 
 changeView("gallery", {})
