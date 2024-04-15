@@ -162,7 +162,7 @@ const postView = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify([ this.addTagInput.value ]),
+                body: JSON.stringify([ this.removeTagInput.value ]),
             })
 
             resp = await fetch(`${API_URL}/api/posts/${post.postId}`)
