@@ -234,7 +234,9 @@ document.getElementById("upload-button").addEventListener("click", (event) => {
 const loginStatus = document.getElementById("login-status")
 
 async function updateLoginStatus() {
-    const resp = await fetch(`${API_URL}/api/auth/login-status`)
+    const resp = await fetch(`${API_URL}/api/auth/login-status`, {
+        cache: "no-cache",
+    })
     const json = await resp.json()
     if (!json.loggedIn) {
         loginStatus.textContent = "not logged in"
